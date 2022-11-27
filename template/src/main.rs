@@ -1,12 +1,13 @@
-fn main() {
-    let input = {
-        use helper::easy_input;
-        use std::env::args;
+use helper::{resolve, when};
 
-        let run_arg = args().next().unwrap();
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let input = {
+        let run_arg = std::env::args().next().unwrap();
         let day = run_arg.split('/').last().unwrap();
-        easy_input(day)
+        helper::easy_input(day)
     };
 
     println!("{}", input);
+
+    Ok(())
 }

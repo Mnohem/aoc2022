@@ -1,3 +1,5 @@
+pub mod util;
+
 pub fn easy_input(input_name: &str) -> String {
     use std::fs::read_to_string;
     use std::path::Path;
