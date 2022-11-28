@@ -22,6 +22,11 @@ pub fn easy_input(input_name: &str) -> String {
         .trim()
         .to_owned()
 }
+pub fn easy_aoc_input() -> String {
+        let run_arg = std::env::args().next().unwrap();
+        let day = run_arg.split('/').last().unwrap();
+        easy_input(day)
+}
 
 #[cfg(test)]
 mod input {

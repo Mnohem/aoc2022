@@ -1,11 +1,7 @@
 use helper::{resolve, when};
 
 fn main() {
-    let input = {
-        let run_arg = std::env::args().next().unwrap();
-        let day = run_arg.split('/').last().unwrap();
-        helper::easy_input(day)
-    };
+    let input = helper::easy_aoc_input();
 
     println!("{}", input);
 }
