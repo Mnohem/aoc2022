@@ -1,4 +1,7 @@
 pub mod util;
+pub use regex;
+pub use once_cell;
+pub use ndarray;
 
 pub fn easy_input(input_name: &str) -> String {
     use std::fs::read_to_string;

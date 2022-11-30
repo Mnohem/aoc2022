@@ -1,28 +1,16 @@
-use helper::{resolve, when};
+use helper::*;
+use once_cell::sync::Lazy;
+
+static INPUT: Lazy<String> = Lazy::new(|| helper::easy_aoc_input());
 
 fn main() {
-    let input = helper::easy_aoc_input();
-
-    println!("{}", input);
+    println!("{}", *INPUT);
 }
 
-pub fn day#_p1(input: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub fn day#_p1() -> Result<(), Box<dyn std::error::Error>> {
     todo!()
 }
 
-pub fn day#_p2(input: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub fn day#_p2() -> Result<(), Box<dyn std::error::Error>> {
     todo!()
-}
-
-#[cfg(test)]
-mod solve {
-    #[test]
-    fn solved_p1() {
-        assert!(false);
-    }
-
-    #[test]
-    fn solved_p2() {
-        assert!(false);
-    }
 }
