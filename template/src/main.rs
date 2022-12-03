@@ -7,10 +7,10 @@ fn main() {
     println!("{}", *INPUT);
 }
 
-pub fn day#_p1() -> Result<(), Box<dyn std::error::Error>> {
+pub fn day#_p1() -> Option<u64> {
     todo!()
 }
 
-pub fn day#_p2() -> Result<(), Box<dyn std::error::Error>> {
+pub fn day#_p2() -> Option<u64> {
     todo!()
 }
