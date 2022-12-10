@@ -21,6 +21,7 @@ pub fn lines(alloc: std.mem.Allocator, str: []const u8) ![][]const u8 {
 
 	return toReturn;
 }
+
 pub fn trim(str: []const u8) []const u8 {
 	var start: usize = std.math.maxInt(usize);
 	var end: usize = 0;
