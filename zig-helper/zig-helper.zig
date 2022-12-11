@@ -39,16 +39,47 @@ pub fn trim(str: []const u8) []const u8 {
 	return str[start..end + 1];
 }
 
-pub fn find(char: u8, many: usize, str: []const u8) ?usize {
+pub fn find(el: anytype, many: usize, slice: []const @TypeOf(el)) ?usize {
 	if (many == 0) @panic("find expects many > 0");
 
 	var cnt: usize = many;
 
-	for (str) |other, i| {
-		if (char == other and cnt == 1)
+	for (slice) |other, i| {
+		if (el == other and cnt == 1)
 			return i
-		else if (char == other)
+		else if (el == other)
 			cnt -= 1;
 	}
 	return null;
+}
+
+test "find" {
+	const str = "sdfasdfasdfff fsgfg ";
+	try std.testing.expectEqual(find(@as(u8, ' '), 1, str), 13);
+	try std.testing.expectEqual(find(@as(u8, ' '), 2, str), str.len - 1);
+}
+
+pub fn findPat(comptime T: type, pat: []const T, many: usize, slice: []const T) ?usize {
+	if (many == 0) @panic("findPat expects many > 0");
+
+	var cnt: usize = many;
+
+	var i = pat.len;
+
+	while (i <= slice.len) : (i += 1) {
+		const sub = slice[i - pat.len..i];
+
+		if (std.mem.eql(T, pat, sub) and cnt == 1)
+			return i - pat.len
+		else if (std.mem.eql(T, pat, sub))
+			cnt -= 1;
+	}
+	return null;
+}
+
+test "findPat" {
+	const str = "sdfasdfasdfff fsgfg";
+	try std.testing.expectEqual(findPat(u8, "fff", 1, str), 10);
+	try std.testing.expectEqual(findPat(u8, "fff", 2, str), null);
+	try std.testing.expectEqual(findPat(u8, "sdf", 1, str), 0);
 }

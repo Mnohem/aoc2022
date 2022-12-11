@@ -18,11 +18,11 @@ pub fn main() !void {
 	const inputLines = try aoc.lines(aa, aoc.trim(input));
 	std.mem.reverse([]const u8, inputLines[0..9]);
 
-    try stdout.print("Day 5 Part 1: {!s}\n", .{day4_p1(aa, inputLines)});
-    try stdout.print("Day 5 Part 2: {!s}\n", .{day4_p2(aa, inputLines)});
+    try stdout.print("Day 5 Part 1: {!s}\n", .{day5_p1(aa, inputLines)});
+    try stdout.print("Day 5 Part 2: {!s}\n", .{day5_p2(aa, inputLines)});
 }
 
-fn day4_p1(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
+fn day5_p1(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
 	const TailQueue = std.TailQueue(u8);
 		
 	var stacks: [9]TailQueue = [_]TailQueue {.{}} ** 9;
@@ -70,7 +70,7 @@ fn day4_p1(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
 	});
 }
 
-fn day4_p2(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
+fn day5_p2(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
 	const TailQueue = std.TailQueue(u8);
 		
 	var stacks: [9]TailQueue = [_]TailQueue {.{}} ** 9;
