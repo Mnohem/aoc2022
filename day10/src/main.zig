@@ -18,7 +18,7 @@ pub fn main() !void {
 	const inputLines = try aoc.lines(aa, aoc.trim(input));
 
     try stdout.print("Day 10 Part 1: {!d}\n", .{day10_p1(inputLines)});
-    try stdout.print("Day 10 Part 2: {!d}\n", .{day10_p2(aa, inputLines)});
+    try stdout.print("Day 10 Part 2:\n{!s}\n", .{day10_p2(aa, inputLines)});
 }
 	
 fn day10_p1(inputLines: [][]const u8) !isize {
@@ -43,8 +43,45 @@ fn day10_p1(inputLines: [][]const u8) !isize {
 	return sum;
 }
 
-fn day10_p2(alloc: std.mem.Allocator, inputLines: [][]const u8) !usize {
-	_ = alloc;
-	_ = inputLines;
-	return 0;
+fn day10_p2(alloc: std.mem.Allocator, inputLines: [][]const u8) ![]const u8 {
+	var x: isize = 1;
+	var cycle: isize = 0;
+	var crt = std.ArrayList(u8).init(alloc);
+
+	for (inputLines) |line| {
+		var toAdd: isize = 0;
+		if (std.mem.startsWith(u8, line, "addx")) {
+			toAdd = try fmt.parseInt(isize, line[5..], 10);
+			cycle += 1;
+
+			const pixel: u8 =
+				if (cycle - 1 == x - 1 or cycle - 1 == x or cycle - 1 == x + 1)
+					'#' else '.';
+
+			if (@mod(cycle, 40) == 0) {
+				try crt.append(pixel);
+				try crt.append('\n');
+				cycle = 0;
+			}
+			else
+				try crt.append(pixel);
+		}
+		cycle += 1;
+
+		const pixel: u8 =
+			if (cycle - 1 == x - 1 or cycle - 1 == x or cycle - 1 == x + 1)
+				'#' else '.';
+
+		if (@mod(cycle, 40) == 0) {
+			try crt.append(pixel);
+			try crt.append('\n');
+			cycle = 0;
+		}
+		else
+			try crt.append(pixel);
+
+		x += toAdd;
+	}
+
+	return crt.items;
 }
