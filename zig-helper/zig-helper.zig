@@ -23,12 +23,12 @@ pub fn lines(alloc: std.mem.Allocator, str: []const u8) ![][]const u8 {
 }
 
 pub fn trim(str: []const u8) []const u8 {
-	var start: usize = std.math.maxInt(usize);
+	var start: ?usize = null;
 	var end: usize = 0;
 
 	for (str) |char, i| {
 		if (
-			!(char == ' ' or char == '\n' or char == '\t' or char == '\r') and start == std.math.maxInt(usize)
+			!(char == ' ' or char == '\n' or char == '\t' or char == '\r') and start == null
 		) {
 			start = i;
 			end = i;
@@ -36,7 +36,10 @@ pub fn trim(str: []const u8) []const u8 {
 			end = i;
 	}
 
-	return str[start..end + 1];
+	return if (start) |st| str[st..end + 1] else "";
+}
+test "trim" {
+	try std.testing.expectEqualBytes("dfdf", trim("\t  \n  dfdf  "));
 }
 
 pub fn find(el: anytype, many: usize, slice: []const @TypeOf(el)) ?usize {
